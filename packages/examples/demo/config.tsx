@@ -278,6 +278,39 @@ export default (skin: string) => {
   //////////////////////////////////////////////////////////////////////
 
   const fields: Fields = {
+    p: {
+      label: "پورتفو",
+      tooltip: "Group of fields",
+      type: "!struct",
+      subfields: {
+        portfolioId: {
+          label2: "کد معاملاتی", //only for menu's toggler
+          type: "text",
+          fieldSettings: {
+            validateValue: (val, fieldSettings) => {
+              return (val.length < 10);
+            },
+          } as TextFieldSettings,
+          mainWidgetProps: {
+            valueLabel: "Name",
+            valuePlaceholder: "Enter name",
+          },
+        },
+        login: {
+          type: "text",
+          tableName: "t1", // legacy: PR #18, PR #20
+          fieldSettings: {
+            validateValue: (val, fieldSettings) => {
+              return (val.length < 10 && (val === "" || val.match(/^[A-Za-z0-9_-]+$/) !== null));
+            },
+          } as TextFieldSettings,
+          mainWidgetProps: {
+            valueLabel: "Login",
+            valuePlaceholder: "Enter login",
+          },
+        }
+      }
+    },
     user: {
       label: "User",
       tooltip: "Group of fields",
